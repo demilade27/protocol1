@@ -24,7 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 @SuppressWarnings("unused")
 public class Protocol1Client{
-	static String hexKey="xmw20e2k3d3dfr0h";
+	
     static int portNo = 11337;
 	
 
@@ -34,7 +34,7 @@ public class Protocol1Client{
 			while (true) {
 			InetAddress host = InetAddress.getLocalHost();
 			Socket Socket = new Socket(host.getHostName(),portNo);
-			Thread instance = new Thread(new ProtocolCLientInstance(Socket,hexKey));
+			Thread instance = new Thread(new ProtocolCLientInstance(Socket));
 			instance.start();
 			}
 		} catch (Exception e) {

@@ -20,20 +20,12 @@ public class ProtocolCLientInstance implements Runnable{
 	static Cipher encAEScipher;
 	String hexKey;
 	
-	public ProtocolCLientInstance(Socket myConnection,String hexKey) {
+	public ProtocolCLientInstance(Socket myConnection) {
 	    this.myConnection=myConnection;
-	    this.myConnection = myConnection;
+	  
 	    //Set up the cipher object
-	    this.hexKey=hexKey;
-	    Key aesKey = new SecretKeySpec(hexStringToByteArray(hexKey), "AES");
-	    try {
-		decAEScipher = Cipher.getInstance("AES");
-		decAEScipher.init(Cipher.DECRYPT_MODE, aesKey);
-		encAEScipher = Cipher.getInstance("AES");
-		encAEScipher.init(Cipher.ENCRYPT_MODE, aesKey);
-	    } catch (Exception e) {
-		System.out.println("Doh "+e);
-	    }			
+
+	    
 	}
 
 	@Override
