@@ -24,7 +24,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 @SuppressWarnings("unused")
 public class Protocol1Client{
-	static String hexKey;
+	static String hexKey="xmw20e2k3d3dfr0h";
     static int portNo = 11337;
 	
 

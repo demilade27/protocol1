@@ -21,6 +21,7 @@ public class ProtocolCLientInstance implements Runnable{
 	String hexKey;
 	
 	public ProtocolCLientInstance(Socket myConnection,String hexKey) {
+	    this.myConnection=myConnection;
 	    this.myConnection = myConnection;
 	    //Set up the cipher object
 	    this.hexKey=hexKey;
