@@ -41,6 +41,7 @@ public class ProtocolCLientInstance implements Runnable{
 		String messageString="Connect Protocol 1";
 		byte[] message1 = messageString.getBytes();
 		outStream.write(message1);
+		System.out.println("i have sent it ");
 		
 		
 		
