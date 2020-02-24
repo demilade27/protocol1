@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -38,14 +39,25 @@ public class ProtocolCLientInstance implements Runnable{
 		
 		// Protocol Step 1
 		// We send the ascii for "Connect Protocol 1"
-		String messageString="Connect Protssssocol 1";
+		String messageString="Connect Protocol 1";
 		byte[] message1 = messageString.getBytes();
 		outStream.write(message1);
-		System.out.println("i have sent it ");
+		if (debug)System.out.println("i have sent it ");
+		
+		
+		//receive nonce
+		byte[] encryptedServerNonce =new byte[32];
+		inStream.read(encryptedServerNonce);
+		System.out.println("Server nonce :"+encryptedServerNonce);
+		if (debug) System.out.println("Recived M3 :"+byteArrayToHexString(encryptedServerNonce));
+	
+		
+		}
 		
 		
 		
-	    }
+		
+	    
 	    catch (IOException e) {
 			//Nothing we can do about this one
 			if (debug) System.out.println("See that cable on the back of your computer? Stop pulling it out: "+e);
