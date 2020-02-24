@@ -45,11 +45,17 @@ public class ProtocolCLientInstance implements Runnable{
 		if (debug)System.out.println("i have sent it ");
 		
 		
-		//receive nonce
+		//receive nonce step 2
 		byte[] encryptedServerNonce =new byte[32];
 		inStream.read(encryptedServerNonce);
-		System.out.println("Server nonce :"+encryptedServerNonce);
-		if (debug) System.out.println("Recived M3 :"+byteArrayToHexString(encryptedServerNonce));
+		if (debug) System.out.println("Recived server nonce  :"+byteArrayToHexString(encryptedServerNonce));
+		
+		
+		//send nonce back (step 3)
+		outStream.write(encryptedServerNonce);
+		if(debug) System.out.println("i sent back the nonce"+byteArrayToHexString(encryptedServerNonce));
+		
+		
 	
 		
 		}
