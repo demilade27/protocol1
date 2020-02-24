@@ -1,6 +1,15 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
+import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
 @SuppressWarnings("unused")
@@ -28,7 +37,28 @@ public class ProtocolCLientInstance implements Runnable{
 
 	@Override
 	public void run() {
+	    OutputStream outStream;
+	    InputStream inStream;
+	    try {
+		outStream = myConnection.getOutputStream();
+		inStream = myConnection.getInputStream();
+		
+		// Protocol Step 1
+		// We send the ascii for "Connect Protocol 1"
+		String messageString="Connect Protocol 1".trim();
+		byte[] message1 = messageString.getBytes();
+		outStream.write(message1);
+		
+		
+		
+	    }
+	    catch (IOException e) {
+			//Nothing we can do about this one
+			if (debug) System.out.println("See that cable on the back of your computer? Stop pulling it out: "+e);
+			return;
+		    }
 	
+		
 		
 	}
 
