@@ -13,6 +13,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
+import sun.security.krb5.internal.crypto.Des;
+
 @SuppressWarnings("unused")
 public class ProtocolCLientInstance implements Runnable{
 	Socket myConnection;
@@ -53,10 +55,33 @@ public class ProtocolCLientInstance implements Runnable{
 		
 		//send nonce back (step 3)
 		outStream.write(encryptedServerNonce);
-		if(debug) System.out.println("i sent back the nonce"+byteArrayToHexString(encryptedServerNonce));
+		if(debug) System.out.println("i sent back the nonce :"+byteArrayToHexString(encryptedServerNonce));
 		
 		
-	
+		  //get encryption and decrytion
+	    byte[] keyBytes = "0".getBytes();
+	    SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
+	    Cipher decAEScipherSession = Cipher.getInstance("AES");			
+	    decAEScipherSession.init(Cipher.DECRYPT_MODE, secretKeySpec);
+	    Cipher encAEScipherSession = Cipher.getInstance("AES");			
+	    encAEScipherSession.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+	    if (debug) System.out.println("Session key :"+byteArrayToHexString(keyBytes));
+		//recieve the session key (step 4)
+		
+		byte[] sessionkey =new byte[48];
+		inStream.read(sessionkey);
+		if (debug) System.out.println("Recived server sessionkey  :"+byteArrayToHexString(sessionkey));
+		
+		//send back same session key (step 5)
+		outStream.write(sessionkey);
+		if (debug) System.out.println("sending server sessionkey  :"+byteArrayToHexString(sessionkey));
+		
+		
+		//recieve the token 
+		byte[] message =new byte[41];
+		inStream.read(message);
+		decAEScipherSession.doFinal(message);
+		if (debug) System.out.println(byteArrayToHexString(message));
 		
 		}
 		
@@ -68,7 +93,22 @@ public class ProtocolCLientInstance implements Runnable{
 			//Nothing we can do about this one
 			if (debug) System.out.println("See that cable on the back of your computer? Stop pulling it out: "+e);
 			return;
-		    }
+		    } catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoSuchPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalBlockSizeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BadPaddingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	
 		
 		
