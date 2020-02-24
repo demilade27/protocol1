@@ -31,12 +31,12 @@ public class Protocol1Client{
     
 	public static void main(String []args) throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
 		try { 
-			while (true) {
+		
 			InetAddress host = InetAddress.getLocalHost();
-			Socket Socket = new Socket(host.getHostName(),portNo);
+			Socket Socket = new Socket(host,portNo);
 			Thread instance = new Thread(new ProtocolCLientInstance(Socket));
 			instance.start();
-			}
+			
 		} catch (Exception e) {
 		    System.out.println("Doh "+e);
 		}
