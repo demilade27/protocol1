@@ -84,7 +84,7 @@ public class Protocol1Server {
 		inStream.read(message1);
 		if (debug) System.out.println("Got M1: "+new String(message1));
 		
-		if (!(new String(message1)).equals("Connect Protocwxwsol 1")) {
+		if (!(new String(message1)).equals("Connect Protocol 1")) {
 		    outStream.write(("Protocol Error. Unregonised command: ").getBytes());
 		    outStream.write(message1);
 		    myConnection.close();
