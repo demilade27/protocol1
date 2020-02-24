@@ -59,7 +59,8 @@ public class ProtocolCLientInstance implements Runnable{
 		
 		
 		  //get encryption and decrytion
-	    byte[] keyBytes = "0".getBytes();
+	    
+	    byte[] keyBytes = new byte[16]
 	    SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
 	    Cipher decAEScipherSession = Cipher.getInstance("AES");			
 	    decAEScipherSession.init(Cipher.DECRYPT_MODE, secretKeySpec);
@@ -70,6 +71,7 @@ public class ProtocolCLientInstance implements Runnable{
 		
 		byte[] sessionkey =new byte[48];
 		inStream.read(sessionkey);
+		
 		if (debug) System.out.println("Recived server sessionkey  :"+byteArrayToHexString(sessionkey));
 		
 		//send back same session key (step 5)
@@ -78,10 +80,12 @@ public class ProtocolCLientInstance implements Runnable{
 		
 		
 		//recieve the token 
-		byte[] message =new byte[41];
+		byte[] message =new byte[inStream.available()];
+		
 		inStream.read(message);
-		decAEScipherSession.doFinal(message);
-		if (debug) System.out.println(byteArrayToHexString(message));
+		byte[]decrytedMessage= new byte[58];
+		decAEScipherSession.doFinal(decrytedMessage);
+		if (debug) System.out.println(byteArrayToHexString(decrytedMessage));
 		
 		}
 		

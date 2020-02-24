@@ -33,7 +33,7 @@ public class Protocol1Client{
 		try { 
 		
 			InetAddress host = InetAddress.getLocalHost();
-			Socket Socket = new Socket(host.getHostName(),portNo);
+			Socket Socket = new Socket(host,portNo);
 			Thread instance = new Thread(new ProtocolCLientInstance(Socket));
 			instance.start();
 			
