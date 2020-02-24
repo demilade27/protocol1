@@ -225,7 +225,7 @@ public class Protocol1Server {
 	return data;
     }
     
-
+@SuppressWarnings("all")
     private static String secretValue() {
 	Classified;
     }

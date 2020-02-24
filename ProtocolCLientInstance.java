@@ -1,9 +1,9 @@
 import java.net.Socket;
 import java.security.Key;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+@SuppressWarnings("unused")
 public class ProtocolCLientInstance implements Runnable{
 	Socket myConnection;
 	boolean debug = true;
@@ -31,6 +31,7 @@ public class ProtocolCLientInstance implements Runnable{
 	
 		
 	}
+
 
 
 private static byte[] xorBytes (byte[] one, byte[] two) {
