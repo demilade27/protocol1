@@ -29,7 +29,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class Protocol1Server {
     
     static int portNo = 11337;
-    static String hexKey= NOT TELLING;
+    static String hexKey= "NOT TELLING";
 
     public static void main (String[] args) {
 	// Listen for connections, when client connects spin off a 
