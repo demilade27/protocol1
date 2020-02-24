@@ -38,14 +38,10 @@ public class ProtocolCLientInstance implements Runnable{
 		
 		// Protocol Step 1
 		// We send the ascii for "Connect Protocol 1"
-		String messageString="Connect Protocol 1";
+		String messageString="Connect Protssssocol 1";
 		byte[] message1 = messageString.getBytes();
 		outStream.write(message1);
-<<<<<<< HEAD
-		System.out.println("i have sent the message"+" "+messageString);
-=======
 		System.out.println("i have sent it ");
->>>>>>> d4a5bfce708f952a83aa66d81d689fb24a81b5d9
 		
 		
 		
