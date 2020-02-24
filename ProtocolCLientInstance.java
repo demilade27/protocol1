@@ -60,7 +60,7 @@ public class ProtocolCLientInstance implements Runnable{
 		
 		  //get encryption and decrytion
 	    
-	    byte[] keyBytes = new byte[16]
+	    byte[] keyBytes = new byte[16];
 	    SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
 	    Cipher decAEScipherSession = Cipher.getInstance("AES");			
 	    decAEScipherSession.init(Cipher.DECRYPT_MODE, secretKeySpec);
@@ -83,9 +83,8 @@ public class ProtocolCLientInstance implements Runnable{
 		byte[] message =new byte[inStream.available()];
 		
 		inStream.read(message);
-		byte[]decrytedMessage= new byte[58];
-		decAEScipherSession.doFinal(decrytedMessage);
-		if (debug) System.out.println(byteArrayToHexString(decrytedMessage));
+		byte[]decrytedMessage= decAEScipherSession.doFinal(message);
+		if (debug) System.out.println(new String(decrytedMessage));
 		
 		}
 		
