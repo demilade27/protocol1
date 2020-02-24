@@ -38,7 +38,7 @@ public class Protocol1Client{
 			instance.start();
 			
 		} catch (Exception e) {
-		    System.out.println("Doh "+e);
+		    System.out.println("error in client "+e);
 		}
 		
 	}
