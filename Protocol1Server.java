@@ -29,7 +29,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class Protocol1Server {
     
     static int portNo = 11337;
-    static String hexKey= NOT TELLING;
+    static String hexKey= "02292189128234350229218912823435";
 
     public static void main (String[] args) {
 	// Listen for connections, when client connects spin off a 
@@ -151,7 +151,7 @@ public class Protocol1Server {
 		    if (debug) System.out.println("Nonces match,");
 		    
 		    //Protocol Step 6
-		    byte[] plainTextM6 = ("Well Done. Submit this value: "+secretValue()).getBytes();
+		    byte[] plainTextM6 = ("Well Done. Submit this value: ").getBytes();
 		    byte[] cipherTextM6 = encAEScipherSession.doFinal(plainTextM6);
 		    outStream.write(cipherTextM6);
 		    if (debug) System.out.println("Secret sent: "+new String(plainTextM6));
@@ -226,7 +226,5 @@ public class Protocol1Server {
     }
     
 
-    private static String secretValue() {
-	Classified;
-    }
+    
 }

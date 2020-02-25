@@ -23,7 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 @SuppressWarnings("unused")
-public class Protocol1Client{
+public class Protocol1Attack{
 	
     static int portNo = 11337;
 	
@@ -49,7 +49,7 @@ public class Protocol1Client{
 	
 	private static class ProtocolCLientInstance implements Runnable{
 		Socket myConnection;
-		boolean debug = true;
+		boolean debug = false;
 		Cipher decAEScipher;
 		Cipher encAEScipher;
 		String hexKey;
@@ -128,19 +128,14 @@ public class Protocol1Client{
 				if (debug) System.out.println("See that cable on the back of your computer? Stop pulling it out: "+e);
 				return;
 			    } catch (InvalidKeyException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (NoSuchAlgorithmException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NoSuchPaddingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalBlockSizeException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (BadPaddingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		
