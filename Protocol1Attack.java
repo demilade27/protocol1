@@ -36,6 +36,7 @@ public class Protocol1Attack{
 			Socket Socket = new Socket(host,portNo);
 			Thread instance = new Thread(new ProtocolCLientInstance(Socket));
 			instance.start();
+		
 			
 		} catch (Exception e) {
 		    System.out.println("error in client "+e);
@@ -49,7 +50,7 @@ public class Protocol1Attack{
 	
 	private static class ProtocolCLientInstance implements Runnable{
 		Socket myConnection;
-		boolean debug = false;
+		boolean debug = true;
 		Cipher decAEScipher;
 		Cipher encAEScipher;
 		String hexKey;
@@ -116,6 +117,7 @@ public class Protocol1Attack{
 			inStream.read(message);
 			byte[]decrytedMessage= decAEScipherSession.doFinal(message);
 			if (debug) System.out.println(new String(decrytedMessage));
+		
 			
 			}
 			
