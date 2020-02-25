@@ -49,7 +49,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class Protocol2Server {
 
 	static int portNo = 11338;
-	static String hexKey= ?????;
+	static String hexKey= "02292189128234350229218912823435";
 	// Values of p & g for Diffie-Hellman found using generateDHprams()
 	static BigInteger g = new BigInteger("129115595377796797872260754286990587373919932143310995152019820961988539107450691898237693336192317366206087177510922095217647062219921553183876476232430921888985287191036474977937325461650715797148343570627272553218190796724095304058885497484176448065844273193302032730583977829212948191249234100369155852168");
 	static BigInteger p = new BigInteger("165599299559711461271372014575825561168377583182463070194199862059444967049140626852928438236366187571526887969259319366449971919367665844413099962594758448603310339244779450534926105586093307455534702963575018551055314397497631095446414992955062052587163874172731570053362641344616087601787442281135614434639");
@@ -170,7 +170,7 @@ public class Protocol2Server {
 		    }
 		    
 		    //Protocol Step 6
-		    byte[] message6pt = ("Well Done. Submit this value: "+secretValue()).getBytes();
+		    byte[] message6pt = ("Well Done. Submit this value: ").getBytes();
 		    byte[] message6ct = encAESsessionCipher.doFinal(message6pt);
 		    outStream.write(message6ct);
 		    if (debug) System.out.println("Secret sent: "+new String(message6pt));
@@ -271,10 +271,7 @@ public class Protocol2Server {
 	    }
 	    return data;
 	}
-	
-	private static String secretValue() {
-	    ??????;
-	}
+
 	
     }
 }

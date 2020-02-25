@@ -1,18 +1,9 @@
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketImpl;
-import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Arrays;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -22,18 +13,18 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 
-@SuppressWarnings("unused")
+
 public class Protocol1Attack{
 	
     static int portNo = 11337;
 	
 
     
-	public static void main(String []args) throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException {
+	public static void main(String []args) throws IOException, ClassNotFoundException, InterruptedException {
 		try { 
 		
-			InetAddress host = InetAddress.getLocalHost();
-			Socket Socket = new Socket(host,portNo);
+			
+			Socket Socket = new Socket("127.0.0.1",portNo);
 			Thread instance = new Thread(new ProtocolCLientInstance(Socket));
 			instance.start();
 		
@@ -51,9 +42,7 @@ public class Protocol1Attack{
 	private static class ProtocolCLientInstance implements Runnable{
 		Socket myConnection;
 		boolean debug = true;
-		Cipher decAEScipher;
-		Cipher encAEScipher;
-		String hexKey;
+	
 		
 		public ProtocolCLientInstance(Socket myConnection) {
 		    this.myConnection=myConnection;
@@ -147,17 +136,7 @@ public class Protocol1Attack{
 
 
 
-	private byte[] xorBytes (byte[] one, byte[] two) {
-	if (one.length!=two.length) {
-	    return null;
-	} else {
-	    byte[] result = new byte[one.length];
-	    for(int i=0;i<one.length;i++) {
-		result[i] = (byte) (one[i]^two[i]);
-	    }
-	    return result;
-	}
-	}
+	
 
 	private String byteArrayToHexString(byte[] data) { 
 	StringBuffer buf = new StringBuffer();
@@ -175,15 +154,7 @@ public class Protocol1Attack{
 	return buf.toString();
 	} 
 
-	private byte[] hexStringToByteArray(String s) {
-	int len = s.length();
-	byte[] data = new byte[len / 2];
-	for (int i = 0; i < len; i += 2) {
-	    data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
-				  + Character.digit(s.charAt(i+1), 16));
-	}
-	return data;
-	}
+	
 	}
 
 	
