@@ -7,3 +7,5 @@
 /Protocol1Attack.class
 /Protocol2Server$Protocol2Instance.class
 /Protocol2Server.class
+/Protocol2Attack.class
+/Protocol2Attack$ProtocolCLientInstance.class
