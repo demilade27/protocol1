@@ -49,7 +49,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class Protocol2Server {
 
 	static int portNo = 11338;
-	static String hexKey= "02292189128234350229218912823435";
+	static String hexKey= "8494838547294857483485723475678";
 	// Values of p & g for Diffie-Hellman found using generateDHprams()
 	static BigInteger g = new BigInteger("129115595377796797872260754286990587373919932143310995152019820961988539107450691898237693336192317366206087177510922095217647062219921553183876476232430921888985287191036474977937325461650715797148343570627272553218190796724095304058885497484176448065844273193302032730583977829212948191249234100369155852168");
 	static BigInteger p = new BigInteger("165599299559711461271372014575825561168377583182463070194199862059444967049140626852928438236366187571526887969259319366449971919367665844413099962594758448603310339244779450534926105586093307455534702963575018551055314397497631095446414992955062052587163874172731570053362641344616087601787442281135614434639");
@@ -120,14 +120,12 @@ public class Protocol2Server {
 		    KeyFactory keyfactoryDH = KeyFactory.getInstance("DH");
 		    X509EncodedKeySpec x509Spec = new X509EncodedKeySpec(message1);
 		    PublicKey gToTheX = keyfactoryDH.generatePublic(x509Spec);
-		    if (debug) System.out.println("g^x len: "+publicKeyLen);
-		    if (debug) System.out.println("g^x cert: "+byteArrayToHexString(gToTheX.getEncoded()));
+		
 		    
 		    //Protocol message 2
 		    outStream.writeInt(gToTheY.getEncoded().length);
 		    outStream.write(gToTheY.getEncoded());
-		    if (debug) System.out.println("g^y len: "+gToTheY.getEncoded().length);
-		    if (debug) System.out.println("g^y cert: "+byteArrayToHexString(gToTheY.getEncoded()));
+
 		    
 		    //Calculate session key
 		    // This method sets decAESsessionCipher & encAESsessionCipher
@@ -213,12 +211,10 @@ public class Protocol2Server {
 		serverKeyAgree.init(y);
 		serverKeyAgree.doPhase(gToTheX, true);
 		byte[] secretDH = serverKeyAgree.generateSecret();
-		if (debug) System.out.println("g^xy: "+byteArrayToHexString(secretDH));
 		//Use first 16 bytes of g^xy to make an AES key
 		byte[] aesSecret = new byte[16];
 		System.arraycopy(secretDH,0,aesSecret,0,16);
 		Key aesSessionKey = new SecretKeySpec(aesSecret, "AES");
-		if (debug) System.out.println("Session key: "+byteArrayToHexString(aesSessionKey.getEncoded()));
 		// Set up Cipher Objects
 		decAESsessionCipher = Cipher.getInstance("AES");
 		decAESsessionCipher.init(Cipher.DECRYPT_MODE, aesSessionKey);
@@ -240,9 +236,7 @@ public class Protocol2Server {
 	    //Generate the parameters   
 	    AlgorithmParameters params = paramGen.generateParameters();   
 	    DHParameterSpec dhSpec = (DHParameterSpec)params.getParameterSpec(DHParameterSpec.class);   
-	    System.out.println("These are some good values to use for p & g with Diffie Hellman");
-	    System.out.println("p: "+dhSpec.getP());
-	    System.out.println("g: "+dhSpec.getG());
+
 	    
 	}
 	
