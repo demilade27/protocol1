@@ -53,8 +53,8 @@ public class Protocol2Attack {
 public static class ProtocolCLientInstance  {
 	Socket socket;
 	boolean debug = true;
-	static Cipher decAESsessionCipher;
-	static Cipher encAESsessionCipher;
+	Cipher decAESsessionCipher;
+	Cipher encAESsessionCipher;
 	
 	// i made two constructors because i want a way to know which one is just retrieving the encrypted key 
 	//the idea i currenly have is tahat the one without the  extra i is gonna be used to just get a key  
@@ -115,7 +115,7 @@ public static class ProtocolCLientInstance  {
 			    byte[] decryptedServerNonce= decAESsessionCipher.doFinal(message5ct);
 			    if (debug) System.out.println("2 server sent me this "+decryptedServerNonce);
 			    byte[] serverNonce= new byte[4];
-			    System.arraycopy(decryptedServerNonce, 15, serverNonce, 0, 4);
+			    System.arraycopy(decryptedServerNonce, 16, serverNonce, 0, 4);
 			    if (debug) System.out.println("3 i sent this to client 2"+serverNonce);
 //
 //			   
